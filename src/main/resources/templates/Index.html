@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubrica Contatti</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    
+    <!-- Collegamento al CSS personalizzato -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Rubrica Contatti</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contatti">Contatti</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/about">Chi Siamo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Contenitore principale -->
+    <div class="container mt-4">
+        <h1 class="text-center">Rubrica Contatti</h1>
+
+        <!-- Tabella Contatti -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody id="contattiTable">
+                    <!-- I dati saranno inseriti qui tramite JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white text-center py-3 mt-5">
+        © 2025 - Tutti i diritti riservati
+    </footer>
+
+    <!-- Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- Script per caricare i contatti -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function loadContatti() {
+                fetch('/contatti')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Errore nella risposta del server');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Dati ricevuti:', data);
+                        const contattiTable = document.getElementById('contattiTable');
+                        contattiTable.innerHTML = ''; // Pulizia tabella prima di aggiornare
+
+                        data.forEach(contatto => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${contatto.id}</td>
+                                <td>${contatto.nome}</td>
+                                <td>${contatto.cognome}</td>
+                                <td>${contatto.email}</td>
+                                <td>${contatto.telefono}</td>
+                                <td>${contatto.note || 'N/A'}</td>
+                            `;
+                            contattiTable.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Errore nel caricamento dei contatti:', error));
+            }
+
+            loadContatti(); // Carica i contatti quando la pagina si carica
+        });
+    </script>
+
+</body>
+</html>

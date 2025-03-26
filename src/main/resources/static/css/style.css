@@ -1,0 +1,81 @@
+/* Stile generale */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #343a40;
+    padding: 15px;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f8d210 !important; /* Giallo */
+}
+
+/* Contenitore principale */
+.container {
+    margin-top: 40px;
+}
+
+/* Tabella */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* About Page */
+.about-content {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.about-content img {
+    width: 300px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-content h1 {
+    color: #007bff;
+}
+
+.about-content p {
+    font-size: 20px;
+    font-weight: bold;
+}
